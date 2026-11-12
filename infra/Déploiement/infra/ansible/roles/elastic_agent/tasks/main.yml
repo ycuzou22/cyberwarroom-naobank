@@ -1,0 +1,25 @@
+---
+- name: Télécharger l'Elastic Agent
+  ansible.builtin.get_url:
+    url: "https://artifacts.elastic.co/downloads/beats/elastic-agent/elastic-agent-{{ elastic_version }}-linux-x86_64.tar.gz"
+    dest: /tmp/elastic-agent.tar.gz
+    mode: "0644"
+  creates: /opt/Elastic/Agent
+
+- name: Décompresser
+  ansible.builtin.unarchive:
+    src: /tmp/elastic-agent.tar.gz
+    dest: /tmp
+    remote_src: true
+  args:
+    creates: /opt/Elastic/Agent
+
+- name: Installer et enrôler l'agent (Fleet 8220, données vers 9200)
+  ansible.builtin.command: >
+    /tmp/elastic-agent-{{ elastic_version }}-linux-x86_64/elastic-agent install
+    --non-interactive --insecure
+    --url={{ fleet_url }}
+    --enrollment-token={{ elastic_enrollment_token }}
+  args:
+    creates: /opt/Elastic/Agent
+  no_log: true

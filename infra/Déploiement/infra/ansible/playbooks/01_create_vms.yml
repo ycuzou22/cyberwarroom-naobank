@@ -1,0 +1,50 @@
+---
+# Création des VMs sur Proxmox à partir des modèles
+- name: Créer les VMs du labo
+  hosts: localhost
+  connection: local
+  gather_facts: false
+  vars_files:
+    - ../group_vars/all.yml
+    - ../group_vars/vms.yml
+    - ../group_vars/vault.yml
+  module_defaults:
+    community.general.proxmox_kvm:
+      api_host: "{{ proxmox_api_host }}"
+      api_user: "{{ proxmox_api_user }}"
+      api_token_id: "{{ proxmox_api_token_id }}"
+      api_token_secret: "{{ proxmox_api_token_secret }}"
+      node: "{{ proxmox_node }}"
+  tasks:
+    - name: Cloner chaque VM depuis son modèle
+      community.general.proxmox_kvm:
+        name: "{{ item.name }}"
+        newid: "{{ item.vmid }}"
+        clone: "{{ item.template }}"
+        full: true
+        timeout: 600
+      loop: "{{ vms }}"
+      loop_control:
+        label: "{{ item.name }}"
+
+    - name: Régler CPU, RAM et carte réseau (tag VLAN)
+      community.general.proxmox_kvm:
+        name: "{{ item.name }}"
+        vmid: "{{ item.vmid }}"
+        update: true
+        cores: "{{ item.cores }}"
+        memory: "{{ item.memory_mb }}"
+        net:
+          net0: "virtio,bridge={{ proxmox_bridge }}{{ (',tag=' ~ item.vlan) if item.vlan else '' }}"
+      loop: "{{ vms }}"
+      loop_control:
+        label: "{{ item.name }}"
+
+    - name: Démarrer les VMs
+      community.general.proxmox_kvm:
+        name: "{{ item.name }}"
+        vmid: "{{ item.vmid }}"
+        state: started
+      loop: "{{ vms }}"
+      loop_control:
+        label: "{{ item.name }}"

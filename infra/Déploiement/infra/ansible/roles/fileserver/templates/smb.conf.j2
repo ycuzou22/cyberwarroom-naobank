@@ -1,0 +1,11 @@
+[global]
+   workgroup = NAOBANK
+   server string = SRV-FICHIERS
+   security = user
+   map to guest = never
+   log file = /var/log/samba/log.%m
+
+[partage]
+   path = /srv/partage
+   read only = no
+   valid users = @users

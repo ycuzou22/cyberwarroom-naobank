@@ -1,0 +1,12 @@
+#!/bin/bash
+# Le serveur de sauvegarde se connecte aux serveurs (SSH 22) : il tire les données.
+set -euo pipefail
+export RESTIC_REPOSITORY=/srv/restic-repo
+export RESTIC_PASSWORD_FILE=/root/.restic-pass
+
+rsync -a --delete labadmin@{{ hostvars['SRV-MAIL'].ansible_host }}:/var/mail/ /srv/pull/mail/
+rsync -a --delete labadmin@{{ hostvars['SRV-FICHIERS'].ansible_host }}:/srv/partage/ /srv/pull/fichiers/
+
+restic snapshots >/dev/null 2>&1 || restic init
+restic backup /srv/pull
+restic forget --keep-daily 7 --keep-weekly 4 --prune

@@ -1,0 +1,25 @@
+---
+# Configuration des machines par groupe
+- name: Socle commun des serveurs Linux
+  hosts: linux_servers
+  roles: [common]
+
+- name: Serveur de mail
+  hosts: SRV-MAIL
+  roles: [mail]
+
+- name: Serveur de fichiers
+  hosts: SRV-FICHIERS
+  roles: [fileserver]
+
+- name: Serveur de sauvegarde
+  hosts: SRV-SAUVEGARDE
+  roles: [backup]
+
+- name: SIEM Elastic
+  hosts: SIEM-ELASTIC
+  roles: [elastic]
+
+- name: Agents Elastic sur les serveurs (Fleet doit être prêt)
+  hosts: elastic_agents
+  roles: [elastic_agent]

@@ -1,0 +1,17 @@
+---
+- name: Fuseau horaire
+  community.general.timezone:
+    name: "{{ lab_timezone }}"
+
+- name: Paquets de base
+  ansible.builtin.apt:
+    name: [qemu-guest-agent, chrony, curl, gnupg, ca-certificates]
+    state: present
+    update_cache: true
+
+- name: Services de base actifs
+  ansible.builtin.service:
+    name: "{{ item }}"
+    state: started
+    enabled: true
+  loop: [qemu-guest-agent, chrony]

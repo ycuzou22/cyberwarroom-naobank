@@ -1,0 +1,11 @@
+# Une entrée par machine : VLAN, ressources, modèle source
+vms:
+  - { name: FW-PFSENSE,     vmid: 100, template: tpl-pfsense,     vlan: null, cores: 1, memory_mb: 1024,  disk_gb: 10 }
+  - { name: PC-EMP-01,      vmid: 111, template: tpl-win11,       vlan: 10,   cores: 2, memory_mb: 4096,  disk_gb: 40 }
+  - { name: PC-EMP-02,      vmid: 112, template: tpl-win11,       vlan: 10,   cores: 2, memory_mb: 4096,  disk_gb: 40 }
+  - { name: PC-EMP-03,      vmid: 113, template: tpl-win11,       vlan: 10,   cores: 2, memory_mb: 4096,  disk_gb: 40 }
+  - { name: SRV-MAIL,       vmid: 120, template: tpl-debian-13, vlan: 20,   cores: 2, memory_mb: 2048,  disk_gb: 30 }
+  - { name: SRV-FICHIERS,   vmid: 121, template: tpl-debian-13, vlan: 20,   cores: 2, memory_mb: 2048,  disk_gb: 50 }
+  - { name: SRV-SAUVEGARDE, vmid: 130, template: tpl-debian-13, vlan: 30,   cores: 2, memory_mb: 2048,  disk_gb: 100 }
+  - { name: SIEM-ELASTIC,   vmid: 140, template: tpl-ubuntu-2204, vlan: 40,   cores: 4, memory_mb: 8192,  disk_gb: 100 }
+  - { name: ATTAQUANT,      vmid: 199, template: tpl-kali,        vlan: 99,   cores: 2, memory_mb: 4096,  disk_gb: 40 }
