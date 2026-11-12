@@ -25,3 +25,88 @@ Des connexions inhabituelles associées à son compte utilisateur.
 Des alertes de sécurité suspectes qui n'ont pas été correctement remontées.
 
 Une communication fictive avec un membre du collectif Naoriste retrouvée pendant l'investigation.
+
+
+### les différents modes 
+l'objectif est de créer deux expériences différentes.
+
+### Mode normal
+Les joueurs travaillent ensemble pour défendre Nao Bank contre les Naoristes.
+
+### mode traitre
+la taupe est secrètement infiltré et tente de manipuler les autres.
+
+
+### MODE NORMAL
+
+### Défi 1 – Détecter les premiers signes de l'attaque
+Ce que les joueurs voient :
+Des journaux informatiques présentant des connexions inhabituelles, des informations sur les Naoristes et des activités suspectes sur le réseau.
+
+Ce qu'ils doivent faire :
+Analyser les informations disponibles, identifier les premiers signes de reconnaissance informatique et comprendre la menace.
+
+Condition de réussite :
+Les joueurs identifient les Naoristes comme origine de la menace et comprennent leur objectif contre Nao Bank.
+
+### Défi 2 – Identifier la compromission du système
+Ce que les joueurs voient :
+Des alertes de sécurité signalant des connexions suspectes et des activités inhabituelles sur certains comptes utilisateurs.
+
+Ce qu'ils doivent faire :
+Examiner les journaux du SIEM, identifier le compte compromis et déterminer les conséquences potentielles de cette intrusion.
+
+Condition de réussite :
+Les joueurs identifient le compte suspect, expliquent les anomalies et proposent une mesure de confinement adaptée.
+
+### Défi 3 – Protéger les sauvegardes
+Ce que les joueurs voient :
+Une alerte critique concernant le serveur de sauvegarde. Un compte à rebours indique qu'une opération malveillante pourrait provoquer une perte de données.
+
+Ce qu'ils doivent faire :
+Prioriser la protection des sauvegardes, isoler les systèmes concernés et coordonner la réponse à l'incident.
+
+Condition de réussite :
+Les joueurs protègent les sauvegardes et empêchent la propagation de l'attaque.
+
+
+### MODE TRAITRE
+
+### Défi 1 – Orienter l'enquête sur une mauvaise piste
+Ce que les joueurs voient :
+Plusieurs alertes de sécurité et des informations concernant différents employés et prestataires de Nao Bank.
+
+Ce qu'ils doivent faire :
+Identifier l'origine de l'attaque et confronter les différentes hypothèses.
+
+Intervention de la taupe :
+la taupe tente de convaincre l'équipe que l'origine de l'attaque se trouve chez un prestataire externe.
+
+Condition de réussite :
+Les joueurs ne se contentent pas des déclarations de leurs collègues et vérifient leurs hypothèses à partir des preuves.
+
+### Défi 2 – Découvrir les incohérences
+Ce que les joueurs voient :
+Des journaux de connexion, des rapports SOC et des événements qui ne correspondent pas toujours aux explications fournies.
+
+Ce qu'ils doivent faire :
+Comparer les informations, rechercher les contradictions et déterminer si une personne interne manipule l'investigation.
+
+Intervention de la taupe :
+la taupe tente de minimiser certaines alertes et de détourner l'attention de l'équipe.
+
+Condition de réussite :
+Les joueurs découvrent au moins une contradiction vérifiable entre les déclarations de la taupe et les preuves techniques.
+
+### Défi 3 – Démasquer la taupe
+Ce que les joueurs voient :
+Des communications fictives, des journaux de sécurité et plusieurs éléments compromettants concernant les membres de l'équipe.
+
+Ce qu'ils doivent faire :
+Recouper les preuves, identifier l'informateur interne et présenter les éléments justifiant leur accusation.
+
+Intervention de la taupe :
+la taupe cherche à défendre sa position et à faire croire que les preuves ont été mal interprétées.
+
+Condition de réussite :
+Les joueurs identifient Noé comme la taupe et justifient leur décision avec des preuves concordantes.
