@@ -1,0 +1,25 @@
+---
+- name: Installer restic et rsync
+  ansible.builtin.apt:
+    name: [restic, rsync, openssh-client]
+    state: present
+
+- name: Dossiers de sauvegarde
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+    mode: "0700"
+  loop: [/srv/pull, /srv/restic-repo]
+
+- name: Script de sauvegarde (mode pull via SSH)
+  ansible.builtin.template:
+    src: backup.sh.j2
+    dest: /usr/local/bin/backup-pull.sh
+    mode: "0750"
+
+- name: Planification quotidienne
+  ansible.builtin.cron:
+    name: backup-pull
+    minute: "30"
+    hour: "2"
+    job: /usr/local/bin/backup-pull.sh

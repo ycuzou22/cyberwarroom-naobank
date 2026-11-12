@@ -1,0 +1,15 @@
+# Proxmox
+proxmox_api_host: 192.168.1.10
+proxmox_node: pve
+proxmox_api_user: ansible@pve
+proxmox_api_token_id: ansible
+proxmox_api_token_secret: "{{ vault_proxmox_token_secret }}"
+proxmox_bridge: vmbr1
+
+# Labo
+lab_domain: naobank.lab
+lab_timezone: Europe/Paris
+siem_ip: 192.168.40.10
+fleet_url: "https://{{ siem_ip }}:8220"
+elastic_version: 8.15.3
+elastic_enrollment_token: "{{ vault_elastic_enrollment_token }}"

@@ -1,0 +1,4 @@
+# Copier en vault.yml puis chiffrer : ansible-vault encrypt group_vars/vault.yml
+vault_proxmox_token_secret: "changeme"
+vault_elastic_enrollment_token: "changeme"
+vault_samba_password: "changeme"

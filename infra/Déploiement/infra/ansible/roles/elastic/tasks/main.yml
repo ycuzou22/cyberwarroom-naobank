@@ -1,0 +1,34 @@
+---
+- name: Clé et dépôt Elastic 8.x
+  ansible.builtin.deb822_repository:
+    name: elastic-8
+    uris: https://artifacts.elastic.co/packages/8.x/apt
+    suites: stable
+    components: [main]
+    signed_by: https://artifacts.elastic.co/GPG-KEY-elasticsearch
+    state: present
+
+- name: Installer Elasticsearch et Kibana
+  ansible.builtin.apt:
+    name:
+      - "elasticsearch={{ elastic_version }}"
+      - "kibana={{ elastic_version }}"
+    state: present
+    update_cache: true
+
+- name: Kibana écoute sur le VLAN SOC
+  ansible.builtin.lineinfile:
+    path: /etc/kibana/kibana.yml
+    regexp: "^#?server.host:"
+    line: 'server.host: "{{ siem_ip }}"'
+  notify: restart kibana
+
+- name: Activer et démarrer Elasticsearch puis Kibana
+  ansible.builtin.service:
+    name: "{{ item }}"
+    state: started
+    enabled: true
+  loop: [elasticsearch, kibana]
+
+# À faire dans Kibana : ajouter Fleet Server (port 8220), créer la politique
+# d'agents, puis copier le jeton d'enrôlement dans vault.yml

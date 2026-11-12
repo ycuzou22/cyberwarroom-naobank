@@ -1,0 +1,27 @@
+---
+- name: Installer Postfix et Dovecot
+  ansible.builtin.apt:
+    name: [postfix, dovecot-imapd]
+    state: present
+  environment:
+    DEBIAN_FRONTEND: noninteractive
+
+- name: Paramètres Postfix
+  ansible.builtin.lineinfile:
+    path: /etc/postfix/main.cf
+    regexp: "^{{ item.key }} ="
+    line: "{{ item.key }} = {{ item.value }}"
+  loop:
+    - { key: myhostname, value: "mail.{{ lab_domain }}" }
+    - { key: mydomain, value: "{{ lab_domain }}" }
+    - { key: inet_interfaces, value: all }
+  notify: restart postfix
+
+- name: Dovecot en IMAP
+  ansible.builtin.lineinfile:
+    path: /etc/dovecot/dovecot.conf
+    regexp: "^#?protocols ="
+    line: "protocols = imap"
+  notify: restart dovecot
+
+# À compléter : TLS (993), port 587 submission dans master.cf, comptes de test
